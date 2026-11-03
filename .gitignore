@@ -1,0 +1,6 @@
+# Nunca subir datos reales ni claves al repositorio
+*.pdf
+*.xlsx
+*.xlsm
+.streamlit/secrets.toml
+__pycache__/
