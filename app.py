@@ -11,11 +11,13 @@ st.set_page_config(page_title="Auditor de Visitas · Ploom 2026", page_icon="�
 
 
 def acceso_permitido():
-    """Si hay una contraseña configurada en los 'secrets', se pide antes de mostrar la aplicación."""
-    try:
-        clave = st.secrets["PASSWORD"]
-    except Exception:
-        return True
+    """Si hay una contraseña configurada (variable PASSWORD en Render o 'secrets' en Streamlit), se pide antes de mostrar la aplicación."""
+    clave = os.environ.get("PASSWORD")
+    if not clave:
+        try:
+            clave = st.secrets["PASSWORD"]
+        except Exception:
+            return True
     if st.session_state.get("acceso_ok"):
         return True
     txt = st.text_input("Contraseña", type="password")
